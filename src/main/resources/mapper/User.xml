@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="com.example.vue_backend.mapper.UserMapper">-->
+<!--    <update id="update">-->
+<!--        update vue_table-->
+<!--        set username = #{username}, password = #{password}, nickname=#{nickname}-->
+<!--            , email = #{email}, phone=#{phone}, address=#{address}-->
+<!--        where id=#{id};-->
+<!--    </update>-->
+<!--</mapper>-->
+<mapper namespace="com.example.vue_backend.mapper.UserMapper">
+
+    <update id="update">
+        update vue_table
+
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="address != null">
+                address = #{address}
+            </if>
+        </set>
+
+        <where>
+            id = #{id}
+        </where>
+
+    </update>
+
+</mapper>
