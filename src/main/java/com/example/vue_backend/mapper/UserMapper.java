@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
-@Mapper
+
+
+//@Mapper
 public interface UserMapper {
 
 
@@ -24,7 +26,7 @@ public interface UserMapper {
     @Select("select * from vue_table where username like ${username} limit #{pageNum},#{pageSize}")
     List<User>  selectPage(Integer pageNum, Integer pageSize,String username);
 
-    @Select("select count(*) from vue_table  where username like concat('%',#{username},'%')")
+    @Select("select count(*) from vue_table  where username like #{username}")
     Integer selectTotal(String username);
 }
 

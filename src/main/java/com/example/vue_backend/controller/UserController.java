@@ -45,7 +45,7 @@ public class UserController {
                                         @RequestParam Integer pageSize,
                                         @RequestParam String username) {
         pageNum = (pageNum - 1) * pageSize;
-        username = "%" + username + "%";
+        username = "'%" + username + "%'";
         List<User> data = userMapper.selectPage(pageNum, pageSize, username);
         Integer total = userMapper.selectTotal(username);
         Map<String, Object> res = new HashMap<>();
