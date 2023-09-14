@@ -41,14 +41,16 @@ public class UserController {
 
     // @RequestParam 接受 ?pageNum = 1 & pageSize = 10
     @GetMapping("/page") //这个接口路径就是/user/page
-    public Map<String,Object> findPage(@RequestParam Integer pageNum,
-                               @RequestParam Integer pageSize) {
+    public Map<String, Object> findPage(@RequestParam Integer pageNum,
+                                        @RequestParam Integer pageSize,
+                                        @RequestParam String username) {
         pageNum = (pageNum - 1) * pageSize;
-        List<User> data = userMapper.selectPage(pageNum,pageSize);
-        Integer total = userMapper.selectTotal();
-        Map<String,Object> res = new HashMap<>();
-        res.put("data",data);
-        res.put("res",total);
+        username = "%" + username + "%";
+        List<User> data = userMapper.selectPage(pageNum, pageSize, username);
+        Integer total = userMapper.selectTotal(username);
+        Map<String, Object> res = new HashMap<>();
+        res.put("data", data);
+        res.put("total", total);
         return res;
     }
 

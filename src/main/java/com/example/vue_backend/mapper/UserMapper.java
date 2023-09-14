@@ -21,10 +21,10 @@ public interface UserMapper {
     @Delete("delete from vue_table where id = #{id}")
     Integer deleteById(Integer id);
 
-    @Select("select * from vue_table limit #{pageNum},#{pageSize}")
-    List<User>  selectPage(Integer pageNum, Integer pageSize);
+    @Select("select * from vue_table where username like ${username} limit #{pageNum},#{pageSize}")
+    List<User>  selectPage(Integer pageNum, Integer pageSize,String username);
 
-    @Select("select count(*) from vue_table")
-    Integer selectTotal();
+    @Select("select count(*) from vue_table  where username like concat('%',#{username},'%')")
+    Integer selectTotal(String username);
 }
 
