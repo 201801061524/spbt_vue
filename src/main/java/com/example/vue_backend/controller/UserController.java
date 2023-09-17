@@ -39,6 +39,10 @@ public class UserController {
         return userService.removeById(id);
     }
 
+    @DeleteMapping("/del/batch")
+    public boolean deleteBatch(@RequestBody List<Integer> ids) { // [1,2,3]
+        return userService.removeByIds(ids);
+    }
     // @RequestParam 接受 ?pageNum = 1 & pageSize = 10
 //    @GetMapping("/page") //这个接口路径就是/user/page
 //    public Map<String, Object> findPage(@RequestParam Integer pageNum,
@@ -55,10 +59,10 @@ public class UserController {
 //    }
     @GetMapping("/page") //这个接口路径就是/user/page
     public IPage<User> findPage(@RequestParam Integer pageNum,
-                                        @RequestParam Integer pageSize,
-                                        @RequestParam(defaultValue = "") String username,
-                                        @RequestParam(defaultValue = "") String email,
-                                        @RequestParam(defaultValue = "") String address) {
+                                @RequestParam Integer pageSize,
+                                @RequestParam(defaultValue = "") String username,
+                                @RequestParam(defaultValue = "") String email,
+                                @RequestParam(defaultValue = "") String address) {
 
         IPage<User> page = new Page<>(pageNum,pageSize);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
